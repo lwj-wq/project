@@ -3,12 +3,28 @@
 {% block content %}
 {#    length过滤器获取movies变量长度 #}
 <p>{{movies|length}}</p>
+
+<form action="/" method="POST">
+    电影名称 <input type="text" name="title" autocomplete="off" required>
+    电影年份 <input type="text" name="year" autocomplete="off" required>
+    <input class='btn' type="submit" name="submit" value="添加电影信息">
+</form>
+
 <ul class="movie-list">
     {% for movie in movies %}
     <li>
         {{ movie.title }}-{{ movie.year }}
         <span class="float-right">
             <a href="http://v.baidu.com/v?word={{ movie.title }}&ct=301989888&rn=67&pn=0&db=0&s=0&fbl=800&ie=utf-8" class="vbaidu" target="_blank" title="百度视频中搜索">百度视频</a>
+        </span>
+        <span class="float-right">
+            <a class='btn' href="{{ url_for('edit',movie_id=movie.id) }}">编辑</a>
+        </span>
+
+        <span class="float-right">
+            <form action="{{ url_for('delete',movie_id=movie.id) }}" method="post">
+                <input type="submit" name="delete" value="删除" onclick="return confirm('是否删除')">
+            </form>
         </span>
     </li>
 

@@ -10,6 +10,9 @@
     {% endblock %}
 </head>
 <body>
+    {% for message in get_flashed_messages() %}
+        <h1 class="alert">{{ message }}</h1>
+    {% endfor %}
     <h2>
         <img class="avatar" src="{{ url_for('static',filename='imgas/123.jpg') }}" alt="">
         {{ user.name }}的电影列表
