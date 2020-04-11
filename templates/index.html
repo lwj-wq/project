@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static',filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='sty.css') }}">
-    <title> {{ user.name }}的电影列表</title>
-</head>
-<body>
-    <h2>
-        <img style="width: 40px" src="{{ url_for('static',filename='imgas/123.jpg') }}" alt="">
-        {{ user.name }}的电影列表
-    </h2>
-    
-    <p>{{movies|length}}</p>
-    <ul class="movie-list">
-        {% for movie in movies %}
-        <li>{{ movie.title }}-{{ movie.year }}</li>
-        {% endfor %}
-    </ul>
-    <footer>&copy;<a href="http://www.baidu.com">百度</a></footer>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+{#    length过滤器获取movies变量长度 #}
+<p>{{movies|length}}</p>
+<ul class="movie-list">
+    {% for movie in movies %}
+    <li>
+        {{ movie.title }}-{{ movie.year }}
+        <span class="float-right">
+            <a href="http://v.baidu.com/v?word={{ movie.title }}&ct=301989888&rn=67&pn=0&db=0&s=0&fbl=800&ie=utf-8" class="vbaidu" target="_blank" title="百度视频中搜索">百度视频</a>
+        </span>
+    </li>
+
+    {% endfor %}
+</ul>
+{% endblock %}

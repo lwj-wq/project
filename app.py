@@ -54,7 +54,18 @@ def forge():
 
 @app.route('/')
 def index():
-   
-    user = User.query.first() #读取用户记录
+    # user = User.query.first() #读取用户记录
     movies = Movie.query.all() #读取所有的电影信息记录
-    return render_template("index.html",user=user,movies=movies)
+    return render_template("index.html",movies=movies)
+
+# 处理页面404错误
+@app.errorhandler(404)
+def page_not_found(e):
+    # user = User.query.first()
+    return render_template('404.html'),404
+
+# 模板上下文处理函数，在多个模板内部都需要使用的变量
+@app.context_processor
+def inject_user():
+    user = User.query.first()
+    return dict(user=user)
