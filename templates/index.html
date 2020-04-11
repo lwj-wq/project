@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static',filename='sty.css') }}">
-    <title> {{ name }}的电影列表</title>
+    <title> {{ user.name }}的电影列表</title>
 </head>
 <body>
     <h2>
         <img style="width: 40px" src="{{ url_for('static',filename='imgas/123.jpg') }}" alt="">
-        {{ name }}的电影列表
+        {{ user.name }}的电影列表
     </h2>
     
     <p>{{movies|length}}</p>
