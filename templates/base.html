@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static',filename='favicon.ico') }}">
-    <link rel="stylesheet" href="{{ url_for('static',filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='indexx.css') }}">
     <title> {{ user.name }}的电影列表</title>
     {% endblock %}
 </head>
@@ -19,10 +19,22 @@
     </h2>
     <nav>
         <ul>
-            <li><a href="{{ url_for('index') }}">主页</a></li>
+            <li>
+                {% if current_user.is_authenticated %}
+                <a href="{{ url_for('index') }}">主页</a>
+                <a href="{{ url_for('login') }}">登录</a>
+                <a href="{{ url_for('logout') }}">登出</a>
+                <a href="{{ url_for('settings') }}">设置name</a>
+                {% else %}
+                <a href="{{ url_for('index') }}">主页</a>
+                <a href="{{ url_for('login') }}">登录</a>
+                {% endif %}
+            </li>
         </ul>
     </nav>
     {% block content %}{% endblock %}
+    <img src="{{ url_for('static',filename='imgas/timg.jpg') }}" alt="" style="width: 80px;
+    position: relative; left: 44%;top:10px;"}>
     <footer>&copy;<a href="http://www.baidu.com">百度</a></footer>
 
 </body>
